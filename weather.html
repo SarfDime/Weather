@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="weather.css">
+    <script src="app.js" defer></script>
+    <script src="weather.js" defer></script>
+</head>
+
+<body>
+
+    <div class="backgroundImage">
+        <img src="./imgs/backgorund3.jpg" alt="Background" id="bkgImg">
+        <div id="gradient"></div>
+    </div>
+
+    <main>
+        <div>
+            <div class="currentCity">
+                <article class="loadingAnimation">
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                </article>
+                <div class="searchCity">
+                    <input class="cityInput" type="text" placeholder="Enter City">
+                    <ul class="citiesListV">
+                    </ul>
+                </div>
+                <div class="weatherInfo">
+                        <section><img
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thermometer-warmer.svg">
+                            <p class="maxTemp"></p>
+                        </section>
+                        <section>
+                            <img
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/thermometer-colder.svg">
+                            <p class="minTemp"></p>
+                        </section>
+                    
+                    <section>
+                        <img class="weatherImage"
+                            src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/humidity.svg">
+                        <p class="precipitation"></p>
+                    </section>
+                    <section>
+                        <img class="weatherImage" id="windImage"
+                            src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/wind-beaufort-1.svg">
+                        <p class="wind-speed"></p>
+                    </section>
+                </div>
+            </div>
+
+            <div class="currentTime">
+                <div class="timeDiv">
+                    <article class="loadingAnimation">
+                        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                    </article>
+                    <p class="cityName"></p>
+                    <p class="cityTemp" id="time"></p>
+                    <p class="date"></p>
+                    <button class="currentLocation">Get Current Weather</button>
+                </div>
+                <div class="foreCastDiv">
+                    <div class="foreCast">
+                        <article class="loadingAnimation">
+                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                        </article>
+                        <section>
+                            <h3 class="hOne"></h3>
+                            <img class="weatherImages" id="imageOne"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraOne">
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="hTwo"></h3>
+                            <img class="weatherImages" id="imageTwo"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraTwo">
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="hThree"></h3>
+                            <img class="weatherImages" id="imageThree"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraThree">
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="currentForecast"></h3>
+                            <img class="weatherImages" id="currentImage"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="currentExtra">
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="hFive"></h3>
+                            <img class="weatherImages" id="imageFive"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraFive">
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="hSix"></h3>
+                            <img class="weatherImages" id="imageSix"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraSix">
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="hSeven"></h3>
+                            <img class="weatherImages" id="imageSeven"
+                                src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                            <div class="extraSeven">
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="tempsAndModes">
+                <article class="loadingAnimation">
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                </article>
+                <div class="currentTemperature">
+                    <img class="weatherImage" id="mainImage"
+                        src="https://github.com/basmilius/weather-icons/raw/dev/production/fill/svg/clear-day.svg">
+                    <p class="cityTemp" id="tempDisp"></p>
+                    <button class="temperatureType">°C</button>
+                </div>
+                <p class="weatherCondition"></p>
+
+                <div class="modeChanger">
+                    <button class="hourlyButton">Hourly</button>
+                    <button class="weeklyButton">Weekly</button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+</body>
+
+</html>

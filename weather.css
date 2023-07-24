@@ -1,0 +1,591 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --priColor: rgb(255, 255, 255);
+    --secColor: rgb(0, 0, 0);
+    --blurColor: rgba(255, 255, 255, 0.452);
+    --blurColor2: rgba(255, 255, 255, 0.322);
+    --accent: rgb(0, 204, 255);
+    --accent2: rgb(255, 0, 0);
+    --opacity: 0;
+    --scale: 0;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-color: var(--priColor);
+    font-family: 'Segoe UI', Calibri, Verdana, sans-serif;
+}
+
+main {
+    position: absolute;
+    top: 5rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+main>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 1em;
+    user-select: none;
+    border-radius: 1rem;
+    border-top-left-radius: 0.1rem;
+}
+
+.backgroundImage {
+    position: relative;
+    transition: 300ms ease;
+}
+
+#bkgImg {
+    top: 0;
+    width: 100%;
+    z-index: -3;
+    transition: 300ms ease;
+}
+
+#gradient {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), var(--priColor)), radial-gradient(circle at right top, transparent 60%, var(--priColor) 110%);
+}
+
+/* ///// LOADING ANIMATION ///// */
+
+.loadingAnimation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    backdrop-filter: blur(0.4rem);
+    background-color: var(--blurColor);
+    border-radius: 0.3rem;
+    background: linear-gradient(to left, var(--blurColor), rgba(255, 255, 255, 0.178));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all ease 300ms;
+    visibility: hidden;
+}
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    margin: 0.2rem;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: var(--accent2) transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* //////// FIRST DIV ////////// */
+
+/* CITY NAME */
+
+.currentCity {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    backdrop-filter: blur(0.4rem);
+    background-color: var(--blurColor);
+    border-radius: 0.3rem;
+    background: linear-gradient(to left, var(--blurColor), rgba(255, 255, 255, 0.178));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    position: relative;
+    top: -5rem;
+    width: 20rem;
+    height: 23rem;
+}
+
+.currentCity section {
+    position: relative;
+    display: flex;
+    top: 0.5rem;
+}
+
+.currentCity section>img {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    left: 0;
+    top: -0.8rem;
+}
+
+.weatherInfo {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--accent2);
+    border-bottom: 1px solid var(--accent2);
+    overflow: hidden;
+    padding: 1rem;
+    margin: 1.5rem 2rem 1.5rem 2rem;
+    background: radial-gradient(rgba(0, 204, 255, 0.682),rgba(0, 0, 0, 0));
+}
+
+/* SEARCH */
+
+.searchCity {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    justify-self: center;
+    align-self: center;
+    overflow: visible;
+    gap: 0.4rem;
+    margin: 2rem 0 0 0;
+}
+
+.cityInput {
+    width: 11rem;
+    height: 0.6rem;
+    padding: 2em;
+    border: none;
+    background: transparent;
+    backdrop-filter: blur(1rem);
+    border-radius: 0.2rem;
+    background: radial-gradient(rgba(0, 204, 255, 0.716),rgba(0, 0, 0, 0));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 2px 3px;
+    text-align: center;
+    outline: none;
+    transition: 300ms ease;
+    justify-self: center;
+    align-self: center;
+    z-index: 1;
+    position: relative;
+    top: -0.5rem;
+    margin-bottom: -2rem;
+}
+
+.cityInput:focus {
+    background-color: var(--accent);
+    opacity: 70%;
+    transition: 300ms ease;
+}
+
+.citiesListV {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 0.3rem;
+    font-size: 1em;
+    width: 19rem;
+    height: 0;
+    visibility: hidden;
+    transition: 500ms ease;
+    text-overflow: ellipsis;
+    margin: 1.8rem 0 -1rem 0;
+    background: linear-gradient(to right, var(--blurColor2), rgba(0, 0, 0, 0));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 3px 3px;
+    border-radius: 0.2rem;
+    padding: 0.2rem;
+}
+
+.citiesListV li {
+    display: flex;
+    padding: 0.05rem;
+    gap: 0.5rem;
+    list-style: none;
+    transition: 300ms ease;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+.citiesListV li>img {
+    position: relative;
+    top: 0.10rem;
+    left: 0.2rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+.citiesListV li:hover {
+    background-color: white;
+    cursor: pointer;
+    transition: 300ms ease;
+}
+
+/* TIME */
+
+.currentTime {
+    width: fit-content;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.currentTime>div {
+    backdrop-filter: blur(0.5rem);
+    border-radius: 0.3rem;
+    background: linear-gradient(to right, var(--blurColor), var(--accent), var(--blurColor));
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeDiv {
+    width: 42rem;
+    height: 25rem;
+}
+
+.cityName {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: -1.5rem 0 -1.5rem 0;
+    white-space: nowrap;
+    transition: 500ms ease;
+}
+
+.cityName img {
+    width: 2.2rem;
+    height: 2.2rem;
+    position: relative;
+    top: 0.4rem;
+}
+
+#time {
+    margin: 2rem;
+}
+
+.date {
+    position: relative;
+    top: -3rem;
+}
+
+/* CURRENT BUTTON*/
+
+.currentLocation {
+    margin: 0 0 4rem 0;
+    border: none;
+    padding: 2em;
+    backdrop-filter: blur(1rem);
+    background-color: var(--blurColor);
+    border-radius: 0.2rem;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: linear-gradient(to right, var(--blurColor), rgb(255, 255, 255), var(--blurColor));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    transition: all 500ms;
+}
+
+.currentLocation:hover {
+    background: linear-gradient(to right, var(--blurColor), var(--accent), var(--blurColor));
+    cursor: pointer;
+    transition: all 500ms;
+}
+
+/* TEMPERATURE */
+
+.tempsAndModes {
+    width: 20rem;
+    height: 23rem;
+    backdrop-filter: blur(0.4rem);
+    border-radius: 0.3rem;
+    background: linear-gradient(to right, var(--blurColor), rgba(255, 255, 255, 0.178));
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    position: relative;
+    top: -5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0;
+}
+
+/* BIG TEMP */
+
+.currentTemperature {
+    display: flex;
+    position: relative;
+    top: -1.5rem;
+}
+
+.weatherImage {
+    width: 5rem;
+    height: 5rem;
+}
+
+.cityTemp {
+    font-size: 5rem;
+    font-weight: 500;
+}
+
+.temperatureType {
+    position: relative;
+    top: 1rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    transition: all 300ms;
+}
+
+.temperatureType:hover {
+    color: var(--accent);
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+.weatherCondition {
+    align-self: center;
+    font-size: large;
+    font-weight: 500;
+    margin: -1.5rem 0 1.5rem 0;
+}
+
+/* BUTTONS */
+
+.modeChanger {
+    display: flex;
+    gap: 0.6rem;
+    top: -3rem;
+}
+
+.modeChanger button {
+    border: none;
+    padding: 0.8em;
+    backdrop-filter: blur(1rem);
+    background-color: var(--blurColor);
+    border-radius: 0.2rem;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--blurColor), var(--blurColor), rgba(255, 255, 255, 0));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    transition: all 500ms;
+}
+
+.modeChanger button:hover {
+    background: var(--accent);
+    cursor: pointer;
+    transition: all 500ms;
+}
+
+.hourlyButton {
+    position: relative;
+}
+
+.hourlyButton.show-before {
+    background-color: var(--accent);
+}
+
+.hourlyButton::before {
+    content: "";
+    display: block;
+    width: 80%;
+    border-top: 3px solid var(--accent2);
+    position: absolute;
+    left: 0.4rem;
+    bottom: -0.5rem;
+    scale: 0;
+    opacity: 0;
+    transition: all 300ms;
+    transition-timing-function: cubic-bezier(0.5,1.6,0.4,0.7);
+}
+
+.hourlyButton.show-before::before {
+    scale: 1;
+    opacity: 100%;
+    transition: all 300ms;
+}
+
+.hourlyButton::after {
+    content: "";
+    display: block;
+    width: 80%;
+    border-top: 3px solid var(--accent2);
+    position: absolute;
+    left: 0.35rem;
+    top: -0.4rem;
+    scale: 0;
+    opacity: 0;
+    transition: all 300ms;
+}
+
+.hourlyButton.show-before::after {
+    scale: 1;
+    opacity: 100%;
+    transition: all 300ms;
+}
+
+.weeklyButton {
+    position: relative;
+}
+
+.weeklyButton.show-before {
+    background-color: var(--accent);
+}
+
+.weeklyButton::before {
+    content: "";
+    display: block;
+    width: 80%;
+    border-top: 3px solid var(--accent2);
+    position: absolute;
+    left: 0.35rem;
+    bottom: -0.5rem;
+    scale: 0;
+    opacity: 0;
+    transition: all 300ms;
+}
+
+.weeklyButton.show-before::before {
+    scale: 1;
+    opacity: 100%;
+    transition: all 300ms;
+}
+
+.weeklyButton::after {
+    content: "";
+    display: block;
+    width: 80%;
+    border-top: 3px solid var(--accent2);
+    position: absolute;
+    left: 0.4rem;
+    top: -0.4rem;
+    scale: 1;
+    scale: 0;
+    opacity: 0;
+    transition: all 300ms;
+}
+
+.weeklyButton.show-before::after {
+    scale: 1;
+    opacity: 100%;
+    transition: all 300ms;
+}
+
+/* ////////// SECOND DIV ////////// */
+
+.foreCastDiv {
+    opacity: 0;
+}
+
+.foreCast {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    width: 34rem;
+    width: fit-content;
+    height: 10rem;
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    border-radius: 0.3rem;
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px;
+    padding: 0 1rem 0 1rem;
+}
+
+.foreCast section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.5rem 0 0.5rem;
+    padding: 0 0.1rem 0 0.1rem
+}
+
+.foreCast section>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.15rem;
+
+}
+
+.foreCast section>div>h4 {
+    font-weight: 600;
+
+}
+
+.foreCast section>div>h5 {
+    font-weight: 450;
+}
+
+.currentForecast {
+    color: var(--accent2);
+}
+
+.weatherImages {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* MEDIA */
+
+@media all and (max-width: 1440px) {
+    main {
+        flex-direction: column-reverse;
+    }
+
+    .currentCity {
+        position: unset;
+    }
+
+    .tempsAndModes {
+        position: unset;
+    }
+
+    .currentTime {
+        position: unset;
+        order: 3;
+    }
+}
